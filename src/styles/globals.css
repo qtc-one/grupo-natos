@@ -18,5 +18,20 @@
   background: var(--scroll-color);
 }
 
+@keyframes tick {
+  0% {
+    stroke-dasharray: 0 20;
+  }
+  100% {
+    stroke-dasharray: 20 0;
+  }
+}
+
+.animate-tick path {
+  stroke-dasharray: 20 0;
+  stroke-dashoffset: 0;
+  animation: tick 0.5s ease-in-out forwards;
+}
+
 @import './fonts.css';
 @import './nprogress.css';

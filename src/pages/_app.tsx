@@ -1,3 +1,4 @@
+import DefaultProvider from '@/contexts/Default'
 import '@/styles/globals.css'
 import fetchJson from '@/utils/fetchJson'
 import type { AppProps } from 'next/app'
@@ -39,7 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
         },
       }}
     >
-      <Component {...pageProps} />
+      <DefaultProvider>
+        <Component {...pageProps} />
+      </DefaultProvider>
     </SWRConfig>
   )
 }
