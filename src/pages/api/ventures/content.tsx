@@ -1,9 +1,19 @@
+import { sessionOptions } from '@/configs/session'
+import fetchJson from '@/utils/fetchJson'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { sessionOptions } from '~/configs/session'
-import fetchJson, { FetchError } from '~/lib/fetchJson'
-import { ListOfVenturesAPIResponse } from '~/types/post'
+export type Venture = {
+  title: string
+  video: string
+  content?: string
+  images: { nodes: { sourceUrl: string }[] }
+  documents: { nodes: { title: string; mediaItemUrl: string }[] }
+}
+
+export type ListOfVenturesAPIResponse = {
+  data: { ventures: { nodes: Venture[] } }
+}
 
 async function venturesContentRoute(
   req: NextApiRequest,
@@ -48,10 +58,6 @@ async function venturesContentRoute(
 
     res.status(200).json(response)
   } catch (error) {
-    if (error instanceof FetchError) {
-      console.error(error.message)
-    }
-    console.error(error)
     res.status(400).json({ data: { ventures: { nodes: [] } } })
   }
 }
