@@ -1,4 +1,4 @@
-import { sessionOptions } from '@/configs/session'
+import { sessionOptions, UserSession } from '@/configs/session'
 import fetchJson from '@/utils/fetchJson'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -24,7 +24,7 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
       token,
       username,
       isLogged: true,
-    }
+    } as UserSession
 
     req.session.user = user
     await req.session.save()

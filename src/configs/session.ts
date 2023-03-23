@@ -2,8 +2,11 @@
 import type { IronSessionOptions } from 'iron-session'
 
 export type UserSession = {
-  // required fields
+  code?: number
+  name?: string
+  email?: string
   token: string
+  document?: string
   username: string
   isLogged: boolean
 }

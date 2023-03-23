@@ -20,7 +20,6 @@ export default function DefaultProvider({ children }: DefaultProviderProps) {
   const [feedback, setFeedback] = useState<FeedbackProps>(null)
 
   const toast = useRef<HTMLDivElement>(null)
-  const toastIcon = useRef<SVGSVGElement>(null)
 
   useEffect(() => {
     function start() {
