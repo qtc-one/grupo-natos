@@ -52,10 +52,10 @@ export const DashboardHeader = ({ username, title, handleSidebar }: Props) => {
                 <a>Editar perfil</a>
               </Link>
             </NavItem>
-            <li className="border-t-2 border-gray-200"></li>
+            <li className="border-t-2 border-neutral-dark-10"></li>
             <NavItem>
               <a
-                className="flex items-center justify-center gap-2 py-1 border-2 border-red-500 rounded-full hover:bg-red-500 text-red-500 hover:text-white font-bold cursor-pointer"
+                className="flex items-center justify-center gap-2 py-1 border-2 border-red rounded-full hover:bg-red text-red hover:text-white font-bold cursor-pointer"
                 onClick={async (e) => {
                   e.preventDefault()
                   mutateUser(await fetchJson('/api/session/logout', { method: 'POST' }), false)

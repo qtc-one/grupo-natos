@@ -141,7 +141,7 @@ export const DashboardSidebar = ({ isOpen, onClick, pathname }: Props) => {
       <Feedback data={feedback} />
 
       {showIRPFModal && (
-        <div className="max-h-96 w-80 pt-14 pb-3 px-4 z-30 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid grid-cols-1 gap-3 items-center bg-neutral-light shadow-3 overflow-scroll rounded-lg">
+        <div className="max-h-96 w-80 pt-14 pb-3 px-4 z-30 fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid grid-cols-1 gap-3 items-center bg-neutral-light shadow-3 overflow-scroll rounded-lg">
           <button
             onClick={handleCloseModals}
             className="absolute top-3 right-3 p-2 rounded-full bg-neutral-dark-10 text-neutral-dark-30"
@@ -185,7 +185,7 @@ export const DashboardSidebar = ({ isOpen, onClick, pathname }: Props) => {
       )}
 
       {showPaymentModal && (
-        <div className="max-h-96 w-80 pt-14 pb-3 px-4 z-30 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid grid-cols-1 gap-3 items-center bg-neutral-light shadow-3 overflow-scroll rounded-lg">
+        <div className="max-h-96 w-80 pt-14 pb-3 px-4 z-30 fixed left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid grid-cols-1 gap-3 items-center bg-neutral-light shadow-3 overflow-scroll rounded-lg">
           <button
             onClick={handleCloseModals}
             className="absolute top-3 right-3 p-2 rounded-full bg-neutral-dark-10 text-neutral-dark-30"

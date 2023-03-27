@@ -33,7 +33,7 @@ export default function Feedback({ data }: Props) {
           ref={toast}
           className={classNames(
             data.error ? 'bg-red' : 'bg-green',
-            'z-50 absolute left-0 bottom-10 p-5 rounded-lg shadow-3 text-neutral-light',
+            'z-50 fixed left-0 bottom-10 p-5 rounded-lg shadow-3 text-neutral-light',
             'transition-all -translate-x-full duration-500'
           )}
         >
