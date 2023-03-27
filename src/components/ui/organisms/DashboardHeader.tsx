@@ -55,7 +55,7 @@ export const DashboardHeader = ({ username, title, handleSidebar }: Props) => {
             <li className="border-t-2 border-neutral-dark-10"></li>
             <NavItem>
               <a
-                className="flex items-center justify-center gap-2 py-1 border-2 border-red rounded-full hover:bg-red text-red hover:text-white font-bold cursor-pointer"
+                className="flex items-center justify-center gap-2 py-1 border-2 border-red rounded-full hover:bg-red text-red hover:text-neutral-light font-bold cursor-pointer"
                 onClick={async (e) => {
                   e.preventDefault()
                   mutateUser(await fetchJson('/api/session/logout', { method: 'POST' }), false)
