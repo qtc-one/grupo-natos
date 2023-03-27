@@ -39,7 +39,7 @@ async function venturesRoute(req: NextApiRequest, res: NextApiResponse<UserVentu
   }
 }
 
-type UserVentures = {
+export type UserVentures = {
   Empresa_ven: number
   Obra_Ven: string
   Num_Ven: number
