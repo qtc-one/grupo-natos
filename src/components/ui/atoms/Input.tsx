@@ -16,8 +16,8 @@ export const Input = ({ mask, type, disabled, ...rest }: Props) => {
     <input
       type={type}
       className={classNames(
-        disabled ? 'text-gray-400 cursor-not-allowed' : '',
-        'w-full px-4 py-2 border-2 border-transparent rounded-full outline-none bg-gray-100 text-lg'
+        disabled ? 'text-neutral-200 cursor-not-allowed' : '',
+        'w-full px-4 py-2 border-2 border-transparent rounded-full outline-none bg-neutral-light-100 text-lg'
       )}
       onKeyDown={(e) => {
         if (type === 'email') handleKeyDown(e, 'email')

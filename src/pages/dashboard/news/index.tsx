@@ -2,7 +2,7 @@ import TemplateDashboard from '@/components/template/Dashboard'
 import { NewsCard } from '@/components/ui/molecules/NewsCard'
 import useArticles from '@/hooks/useArticles'
 import useUser from '@/hooks/useUser'
-import { Article, ArticlesRouteResponse } from '@/pages/api/articles'
+import { Article } from '@/pages/api/articles'
 import nProgress from 'nprogress'
 import { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -47,46 +47,50 @@ export default function NewsPage() {
   return (
     <TemplateDashboard title="Notícias" description="">
       <section className="m-5 p-5 rounded-xl bg-neutral-light">
-        <h2 className="text-3xl font-bold">Novidades</h2>
         {featuresArticles.length > 0 && (
-          <Swiper spaceBetween={20} slidesPerView="auto">
-            {featuresArticles.map((post, index) => {
-              return (
-                <SwiperSlide className="max-w-xs" key={String(index)}>
-                  <NewsCard
-                    slug={post.slug}
-                    date={`${new Date(post.date).getDate()}/${
-                      new Date(post.date).getMonth() + 1
-                    }/${new Date(post.date).getFullYear()}`}
-                    title={post.title}
-                    image={post.featuredImage.node.sourceUrl}
-                  />
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
+          <>
+            <h2 className="text-3xl font-bold">Novidades</h2>
+            <Swiper spaceBetween={20} slidesPerView="auto">
+              {featuresArticles.map((post, index) => {
+                return (
+                  <SwiperSlide className="max-w-xs" key={String(index)}>
+                    <NewsCard
+                      slug={post.slug}
+                      date={`${new Date(post.date).getDate()}/${
+                        new Date(post.date).getMonth() + 1
+                      }/${new Date(post.date).getFullYear()}`}
+                      title={post.title}
+                      image={post.featuredImage.node.sourceUrl}
+                    />
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+          </>
         )}
       </section>
       <section className="m-5 p-5 rounded-xl bg-neutral-light">
-        <h2 className="text-3xl font-bold">Notícias anteriores</h2>
         {comomArticles.length > 0 && (
-          <Swiper spaceBetween={20} slidesPerView="auto">
-            {comomArticles.map((post, index) => {
-              return (
-                <SwiperSlide className="max-w-xs" key={String(index)}>
-                  <NewsCard
-                    slug={post.slug}
-                    date={`${new Date(post.date).getDate()}/${
-                      new Date(post.date).getMonth() + 1
-                    }/${new Date(post.date).getFullYear()}`}
-                    title={post.title}
-                    image={post.featuredImage.node.sourceUrl}
-                    isOld
-                  />
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
+          <>
+            <h2 className="text-3xl font-bold">Notícias anteriores</h2>
+            <Swiper spaceBetween={20} slidesPerView="auto">
+              {comomArticles.map((post, index) => {
+                return (
+                  <SwiperSlide className="max-w-xs" key={String(index)}>
+                    <NewsCard
+                      slug={post.slug}
+                      date={`${new Date(post.date).getDate()}/${
+                        new Date(post.date).getMonth() + 1
+                      }/${new Date(post.date).getFullYear()}`}
+                      title={post.title}
+                      image={post.featuredImage.node.sourceUrl}
+                      isOld
+                    />
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+          </>
         )}
       </section>
     </TemplateDashboard>

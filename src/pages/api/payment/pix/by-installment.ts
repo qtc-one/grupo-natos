@@ -27,7 +27,7 @@ async function PixByInstallmentRoute(req: NextApiRequest, res: NextApiResponse) 
         body: JSON.stringify({
           Login: process.env.UAU_USER_INTEGRATION,
           Senha: process.env.UAU_USER_PASSWORD,
-          UsuarioUAUSite: 'string',
+          UsuarioUAUSite: 'uauweb',
         }),
       }
     )

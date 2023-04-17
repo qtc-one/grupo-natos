@@ -46,6 +46,7 @@ export default function ProfilePage() {
     },
     [router, mutateUser]
   )
+
   return (
     <TemplateDashboard title="Perfil" description="">
       <main className="grid place-content-center md:h-[600px]">

@@ -11,6 +11,23 @@ async function updateUserAccessRoute(req: NextApiRequest, res: NextApiResponse) 
     res.status(401).end()
     return
   }
+
+  console.log({
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: user.token,
+      'Content-Type': 'application/json',
+      'X-INTEGRATION-Authorization': String(process.env.UAU_TOKEN_INTEGRATION),
+    },
+    body: {
+      codigo_pessoa: user.code,
+      login: login,
+      email: email,
+      senha: password,
+    },
+  })
+
   try {
     const response = await fetchJson(
       `${process.env.UAU_BASEURL_INTEGRATION}/Pessoas/AlterarPessoaAcessoPortal`,

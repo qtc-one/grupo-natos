@@ -17,7 +17,7 @@ export const ContactOptions = () => {
         {isVisible ? <FaTimes /> : <BsChatRightDotsFill />}
       </button>
       <ul
-        className={`rounded-xl shadow-[0px_0px_19px_rgba(0,0,0,0.25)] right-0 bottom-20 w-80 bg-white z-20 ${
+        className={`rounded-xl shadow-[0px_0px_19px_rgba(0,0,0,0.25)] right-0 bottom-20 w-80 bg-neutral-light z-20 ${
           isVisible ? 'absolute' : 'hidden'
         }`}
       >

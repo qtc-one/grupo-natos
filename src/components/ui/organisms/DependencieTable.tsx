@@ -77,9 +77,12 @@ export default function DependencieTable({
           message: 'Erro! O número inserido excede o total de parcelas que você pode adiantar',
         })
       } else {
-        let tot = advanceInstallments.slice(0, qtd_installments - 1).reduce((t: number, v: any) => {
-          return t + v.Valor_Prc
-        }, 0)
+        let tot = advanceInstallments
+          .slice(-qtd_installments)
+          .reverse()
+          .reduce((t: number, v: any) => {
+            return t + v.Valor_Prc
+          }, 0)
 
         tot = new Intl.NumberFormat('pt-br', {
           style: 'currency',
@@ -103,7 +106,7 @@ export default function DependencieTable({
             mostrar apenas a parcela do mês e o aviso do jurídico.
           */}
           {new Date(installments.data[1].Data_Prc) > new Date(last3Months.toDateString()) ? (
-            <table className="w-full lg:w-1/2 mt-10">
+            <table className="w-full lg:w-4/5 xl:w-1/2 mt-10">
               <thead>
                 <tr>
                   <th className="pb-2">Vencimento</th>
@@ -129,28 +132,29 @@ export default function DependencieTable({
                           <td className="py-1">R$ {boleto.valorDocumento}</td>
                           <td className="py-1">
                             <span className="inline-flex gap-3 text-xl">
-                              {venture.Empresa_ven === 3 ||
-                                (venture.Empresa_ven === 11 && (
-                                  <button
-                                    onClick={() => {
-                                      const item = installments.data.filter((installment: any) => {
-                                        return installment.Data_Prc === boleto.dataVencimento
-                                      })
+                              {venture.Empresa_ven === 11 || venture.Empresa_ven === 3 ? (
+                                <button
+                                  onClick={() => {
+                                    const item = installments.data.filter((installment: any) => {
+                                      return installment.Data_Prc === boleto.dataVencimento
+                                    })
 
-                                      handleViewPix(
-                                        boleto.codEmpresa,
-                                        item[0].Obra_Prc,
-                                        item[0].Num_Ven,
-                                        item[0].NumParc_Prc,
-                                        item[0].NumParcGer_Prc
-                                      )
-                                    }}
-                                    className="inline-flex items-center gap-1"
-                                  >
-                                    <AiOutlineQrcode title="PIX" />
-                                    <span className="hidden md:inline text-base">Pix</span>
-                                  </button>
-                                ))}
+                                    handleViewPix(
+                                      boleto.codEmpresa,
+                                      item[0].Obra_Prc,
+                                      item[0].Num_Ven,
+                                      item[0].NumParc_Prc,
+                                      item[0].NumParcGer_Prc
+                                    )
+                                  }}
+                                  className="inline-flex items-center gap-1"
+                                >
+                                  <AiOutlineQrcode title="PIX" />
+                                  <span className="hidden md:inline text-base">Pix</span>
+                                </button>
+                              ) : (
+                                <></>
+                              )}
                               <button
                                 onClick={() => handleViewBoleto(boleto.codBanco, boleto.seuNumero)}
                                 className="inline-flex items-center gap-1"
@@ -226,22 +230,36 @@ export default function DependencieTable({
         <></>
       )}
       <Box className="mt-10 ">
-        <form onSubmit={simularAntecipacao} className="flex items-center justify-between">
+        <form onSubmit={simularAntecipacao} className="hidden xl:flex items-center justify-between">
           <span className="flex items-center gap-4">
-            <span className="text-xl font-bold">Total: {total}</span>
-
+            <span className="text-lg font-bold">Total: {total}</span>
             <input
               type="number"
               name="qtd_parcelas"
               className="px-5 py-2 bg-neutral-light-100 outline-none rounded-full placeholder:text-neutral-100 text-center"
             />
             {installments.data && (
-              <span>Você pode atencipar até {advanceInstallments.length} parcelas</span>
+              <small>Você pode atencipar até {advanceInstallments.length} parcelas</small>
             )}
           </span>
+          <button className="px-6 py-2 bg-blue rounded-full text-neutral-light font-bold">
+            Simular Antecipação
+          </button>
+        </form>
+
+        <form onSubmit={simularAntecipacao} className="xl:hidden text-center flex flex-col gap-2">
+          <p className="text-xl font-bold">Total: {total}</p>
+          <input
+            type="number"
+            name="qtd_parcelas"
+            className="px-5 py-2 bg-neutral-light-100 outline-none rounded-full placeholder:text-neutral-100 text-center"
+          />
           <button className="px-6 py-3 bg-blue rounded-full text-neutral-light font-bold">
             Simular Antecipação
           </button>
+          {installments.data && (
+            <small>Você pode atencipar até {advanceInstallments.length} parcelas</small>
+          )}
         </form>
       </Box>
     </>

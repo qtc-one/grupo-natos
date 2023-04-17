@@ -10,7 +10,7 @@ export const InputPassword = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>
         id="password"
         type={passwordIsVisible ? 'text' : 'password'}
         name="password"
-        className="w-full px-4 py-2 border-2 border-transparent rounded-full outline-none bg-gray-100 text-lg"
+        className="w-full px-4 py-2 border-2 border-transparent rounded-full outline-none bg-neutral-light-100 text-lg"
         placeholder="Senha"
         {...rest}
       />

@@ -9,6 +9,7 @@ import DependencieTable from '@/components/ui/organisms/DependencieTable'
 import useUser from '@/hooks/useUser'
 import useVentures from '@/hooks/useVentures'
 import fetchJson from '@/utils/fetchJson'
+import Image from 'next/image'
 import nProgress from 'nprogress'
 import { useEffect, useState } from 'react'
 import { AiOutlineLike } from 'react-icons/ai'
@@ -75,9 +76,7 @@ export default function DependenciesPage() {
         body: JSON.stringify({ company, building, sale, installment, generalInstallment }),
       })
 
-      console.log(generatePix)
-
-      return ''
+      return generatePix
     } catch (error) {
       return ''
     }
@@ -92,7 +91,16 @@ export default function DependenciesPage() {
   ) {
     nProgress.start()
     const response = await getPixImage(company, building, sale, installment, generalInstallment)
-    setPixImage(response)
+
+    if (response === '') {
+      setFeedback({
+        error: true,
+        message: 'O método de pagamento PIX não está disponivel para essa parcela!',
+      })
+      return
+    }
+
+    setPixImage(`data:image/jpg;base64,${response}`)
     setModalPixVisibility(true)
     nProgress.done()
   }
@@ -114,6 +122,7 @@ export default function DependenciesPage() {
   function handleCloseModals() {
     setShowModalPDF(false)
     setShowOverlayer(false)
+    setModalPixVisibility(false)
   }
 
   return (
@@ -142,6 +151,20 @@ export default function DependenciesPage() {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {modalPixIsVisible && (
+        <div className="pt-14 pb-3 px-2 z-30 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid grid-cols-1 gap-3 items-center bg-neutral-light shadow-3 overflow-scroll rounded-lg">
+          <button
+            onClick={handleCloseModals}
+            className="absolute top-3 right-3 p-2 rounded-full bg-neutral-dark-10 text-neutral-dark-30"
+          >
+            <FaTimes />
+          </button>
+          <div className="relative">
+            {pixImage !== '' && <Image src={pixImage} alt="" width={320} height={320} />}
+          </div>
         </div>
       )}
 

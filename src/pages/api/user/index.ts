@@ -8,6 +8,7 @@ async function userRoute(req: NextApiRequest, res: NextApiResponse) {
     try {
       const {
         '0': { dadospessoais },
+        '1': { dadostelefone },
       }: ApiResponseUserLogged = await fetchJson(
         `${process.env.UAU_BASEURL_INTEGRATION}/Autenticador/ConsultarDadosUsrLogado`,
         {
@@ -24,6 +25,7 @@ async function userRoute(req: NextApiRequest, res: NextApiResponse) {
         ...req.session.user,
         name: dadospessoais[1].nome,
         code: dadospessoais[1].codigo,
+        phones: dadostelefone,
         email: dadospessoais[1].email,
         document: dadospessoais[1].cpf,
         isLogged: true,

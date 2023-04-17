@@ -25,7 +25,7 @@ async function GeneratePixRoute(req: NextApiRequest, res: NextApiResponse) {
         body: JSON.stringify({
           Login: process.env.UAU_USER_INTEGRATION,
           Senha: process.env.UAU_USER_PASSWORD,
-          UsuarioUAUSite: 'string',
+          UsuarioUAUSite: 'uauweb',
         }),
       }
     )
@@ -61,8 +61,13 @@ async function GeneratePixRoute(req: NextApiRequest, res: NextApiResponse) {
       }
     )
 
-    res.status(200).json(response)
+    let pix = response[0].Mensagens.m_StringValue.includes('\r')
+      ? response[0].Mensagens.m_StringValue.split('\r')[0]
+      : response[0].Mensagens.m_StringValue
+
+    return res.status(200).json(JSON.parse(pix).base64)
   } catch (error) {
+    console.log(error)
     res.status(400).json(error)
   }
 }
