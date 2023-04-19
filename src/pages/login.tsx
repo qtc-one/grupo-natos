@@ -90,7 +90,10 @@ export default function LoginPage() {
                 </span>
               </div>
             </div>
-            <Link href="/access/recover" className="mb-3 text-neutral-200 font-bold">
+            <Link
+              href="http://uauweb.uau.com.br/PortalUau_Site/AbrePortal.aspx?Empresa=%2bjgAcz1d%2bng%3d&ACAO=RECUPERARSENHA"
+              className="mb-3 text-neutral-200 font-bold"
+            >
               Esqueceu a senha?
             </Link>
             <button className="py-3 bg-blue border-2 border-blue rounded-full text-neutral-light font-bold">
