@@ -26,20 +26,25 @@ export default function CreateAccessPage() {
       birthdate: new Date(event.currentTarget.birthdate.value).toISOString(),
     }
 
-    console.log(body)
+    try {
+      const response = await fetchJson('/api/user/access/create', {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
 
-    // try {
-    //   const response = await fetchJson('/api/user/access/create', {
-    //     method: 'POST',
-    //     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(body),
-    //   })
-    // } catch (error) {
-    //   setFeedback({
-    //     error: true,
-    //     message: 'Erro! Os dados inseridos não correspondem a um cliente Natos!',
-    //   })
-    // }
+      if (response) {
+        setFeedback({
+          error: false,
+          message: 'Sucesso! Seu acesso foi criado!',
+        })
+      }
+    } catch (error) {
+      setFeedback({
+        error: true,
+        message: 'Erro! Os dados inseridos não correspondem a um cliente Natos!',
+      })
+    }
   }, [])
 
   return (
