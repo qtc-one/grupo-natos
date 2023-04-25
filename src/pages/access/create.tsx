@@ -19,25 +19,27 @@ export default function CreateAccessPage() {
     }
 
     const body = {
-      email: event.currentTarget.email.value,
-      login: event.currentTarget.login.value,
-      document: event.currentTarget.document.value,
+      email: event.currentTarget.email.value.toLowerCase().trim(),
+      login: event.currentTarget.login.value.toLowerCase().trim(),
+      document: event.currentTarget.document.value.trim().replace(/\D/g, ''),
       password: event.currentTarget.password.value,
       birthdate: new Date(event.currentTarget.birthdate.value).toISOString(),
     }
 
-    try {
-      const response = await fetchJson('/api/user/access/create', {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-    } catch (error) {
-      setFeedback({
-        error: true,
-        message: 'Erro! Os dados inseridos não correspondem a um cliente Natos!',
-      })
-    }
+    console.log(body)
+
+    // try {
+    //   const response = await fetchJson('/api/user/access/create', {
+    //     method: 'POST',
+    //     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(body),
+    //   })
+    // } catch (error) {
+    //   setFeedback({
+    //     error: true,
+    //     message: 'Erro! Os dados inseridos não correspondem a um cliente Natos!',
+    //   })
+    // }
   }, [])
 
   return (
