@@ -81,7 +81,7 @@ export default function DependencieTable({
           .slice(-qtd_installments)
           .reverse()
           .reduce((t: number, v: any) => {
-            return t + v.Valor_Prc
+            return t + v.ValorReaj
           }, 0)
 
         tot = new Intl.NumberFormat('pt-br', {
@@ -94,6 +94,8 @@ export default function DependencieTable({
     },
     [advanceInstallments]
   )
+
+  console.log(installments)
 
   return (
     <>
