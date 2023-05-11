@@ -32,7 +32,7 @@ export default function DependencieTable({
   const boletos = useBoletos(user)
   const installments = useDependencies(venture.Num_Ven, venture.Empresa_ven, venture.Obra_Ven)
 
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState<string>('0')
   const [dependencies, setDependencies] = useState([])
   const [advanceInstallments, setAdvanceInstallments] = useState<any>([])
   const [feedback, setFeedback] = useState<{
@@ -77,25 +77,28 @@ export default function DependencieTable({
           message: 'Erro! O número inserido excede o total de parcelas que você pode adiantar',
         })
       } else {
-        let tot = advanceInstallments
-          .slice(-qtd_installments)
-          .reverse()
-          .reduce((t: number, v: any) => {
-            return t + v.ValorReaj
-          }, 0)
+        let vlrRef = advanceInstallments.filter((item: any, index: number) => {
+          let item_date = new Date(item.Data_Prc)
+          let today = new Date()
 
-        tot = new Intl.NumberFormat('pt-br', {
+          if (
+            item_date.getMonth() === today.getMonth() &&
+            item_date.getFullYear() === today.getFullYear()
+          ) {
+            return item
+          }
+        })
+
+        let tot = new Intl.NumberFormat('pt-br', {
           style: 'currency',
           currency: 'BRL',
-        }).format(tot)
+        }).format(vlrRef[0].ValorReaj * qtd_installments)
 
         setTotal(tot)
       }
     },
     [advanceInstallments]
   )
-
-  console.log(installments)
 
   return (
     <>
