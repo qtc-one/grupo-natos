@@ -82,7 +82,7 @@ export default function DependencieTable({
           let today = new Date()
 
           if (
-            item_date.getMonth() === today.getMonth() &&
+            item_date.getMonth() === today.getMonth() + 1 &&
             item_date.getFullYear() === today.getFullYear()
           ) {
             return item
