@@ -94,7 +94,7 @@ const PostPage = () => {
                     <a
                       rel="noreferrer"
                       href={
-                        ventures.content?.[selectedTab].title === 'Solar das Águas'
+                        ventures.content?.[selectedTab].title === 'Solar das Águas Park Resort'
                           ? 'https://www.gruponatos.com.br/seu-produto-solar/pasta-tecnica.html'
                           : 'https://www.gruponatos.com.br/seu-produto-olimpia/pasta-tecnica.html'
                       }
